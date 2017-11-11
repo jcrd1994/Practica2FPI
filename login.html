@@ -3,20 +3,71 @@
   <head>
     <meta charset="utf-8">
     <title>practica2</title>
-    <link rel="stylesheet" href="../Practica2FPI/estilos.css" type="text/css">
-  </head>
+    <link rel="stylesheet" href="estilo.css" type="text/css">  </head>
   <body>
       <div class="contenedor">
         <div class="logueo">
+          <form  action="log.php" method="POST">
+
+          </form>
           <label id="nombre">Usuario:</label><br>
-          <input id="user" type="text" name="" ><br>
+          <input id="user" type="text" name="" ><br><br>
           <label id="contra">Contrasena:</label><br>
-          <input id="pass" type="text" name="" ><br>
-          <input type="button" name="" value="Acceder" onclick="">
+          <input id="pass" type="password" name="" ><br><br>
+          <input id="btn" type="button" name="" value="Acceder" onclick="descargaArchivo()">
 
 
         </div>
 
       </div>
+
+      <script type="text/javascript">
+  var READY_STATE_UNINITIALIZED=0;
+  var READY_STATE_LOADING=1;
+  var READY_STATE_LOADED=2;
+  var READY_STATE_INTERACTIVE=3;
+  var READY_STATE_COMPLETE=4;
+
+  var peticion_http;
+
+  function cargaContenido(url, metodo, funcion) {
+    peticion_http = inicializa_xhr();
+
+    if(peticion_http) {
+      peticion_http.onreadystatechange = funcion;
+      peticion_http.open(metodo, url, true);
+      peticion_http.send(null);
+    }
+  }
+
+  function inicializa_xhr() {
+    if(window.XMLHttpRequest) {
+      return new XMLHttpRequest();
+    }
+    else if(window.ActiveXObject) {
+      //para las versiones viejitas de IE y otros navegadores
+      return new ActiveXObject("Microsoft.XMLHTTP");
+    }
+  }
+
+  function muestraContenido() {
+    if(peticion_http.readyState == READY_STATE_COMPLETE) {
+      if(peticion_http.status == 200) {
+        alert(peticion_http.responseText);
+      }
+    }
+  }
+
+  function descargaArchivo() {
+    cargaContenido("log.php", "GET", muestraContenido);
+  }
+
+  function Logueo(){
+  var nombre = Document.getElementById("user").value;
+  var contra = Document.getElementById("pass").value;
+
+  }
+
+      </script>
   </body>
 </html>
